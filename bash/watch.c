@@ -18,7 +18,7 @@ struct {
 } bash_input SEC(".maps");
 
 SEC("uretprobe//bin/bash:readline")
-int watch_bash(watch_bash, const void *ret) {
+int watch_bash(const void *ret) {
     struct bash_info info;
     info.pid = bpf_get_current_pid_tgid() >> 32;
     bpf_probe_read_user_str(info.content, sizeof(info.content), ret);
