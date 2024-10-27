@@ -7,7 +7,7 @@
 #define MAX_LINE_SIZE 500
 
 struct bash_info {
-    u8 content[MAX_LINE_SIZE];
+    char content[MAX_LINE_SIZE];
     int pid;
 };
 
