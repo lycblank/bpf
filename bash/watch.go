@@ -5,9 +5,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/cilium/ebpf/internal/unix"
 	"github.com/cilium/ebpf/link"
 	"github.com/cilium/ebpf/rlimit"
+	"golang.org/x/sys/unix"
 )
 
 func main() {
