@@ -13,7 +13,7 @@ import (
 )
 
 type watchBashInfo struct {
-	Content [500]int8
+	Content [500]uint8
 	Pid     int32
 }
 

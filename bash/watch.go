@@ -5,6 +5,7 @@ import (
 	"log"
 	"time"
 
+	"github.com/cilium/ebpf/internal/unix"
 	"github.com/cilium/ebpf/link"
 	"github.com/cilium/ebpf/rlimit"
 )
@@ -32,14 +33,15 @@ func main() {
 	}
 	defer up.Close()
 
-	bashInfo := watchBashInfo{}
 	ticker := time.NewTicker(1 * time.Second)
 	defer ticker.Stop()
 
 	for range ticker.C {
+		bashInfo := watchBashInfo{}
 		if err := objs.BashInput.LookupAndDelete(nil, &bashInfo); err != nil {
 			fmt.Printf("Loading eBPF objects: %+v\n", err)
 		}
-		fmt.Printf("get pid: %d\n", bashInfo.Pid)
+		fmt.Printf("get pid: %d, content: %s\n", bashInfo.Pid,
+			unix.ByteSliceToString(bashInfo.Content[:]))
 	}
 }
